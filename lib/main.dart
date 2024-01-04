@@ -1,21 +1,30 @@
 import 'package:chat/screens/tabs.dart';
 import 'package:chat/screens/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
     bool isLogged = true;
-    Map<String, String> defultUser = {
-      'name': 'aidin',
-    };
+
+    if (box.read('token') == null) {
+      isLogged = false;
+    }
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -25,7 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const MyApp(),
       },
-      home: isLogged ? const SignUpScreen() : TabsScreen(user: defultUser),
+      home: isLogged ? const TabsScreen() : const SignUpScreen(),
     );
   }
 }

@@ -1,7 +1,14 @@
 class Message {
-  Message({required this.text, required this.isOwn});
-
+  Message({
+    required this.id,
+    required this.isRead,
+    required this.time,
+    required this.text,
+    required this.isOwn,
+  });
+  int id;
   bool isOwn;
   String text;
-  DateTime time = DateTime.now();
+  String time;
+  bool isRead;
 }

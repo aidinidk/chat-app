@@ -1,16 +1,23 @@
 import 'message.dart';
 
 class Contact {
-  Contact(
-      {required this.image,
-      required this.name,
-      required this.messages,
-      this.lastOnline,
-      this.isOnline});
+  Contact({
+    required this.lastMessage,
+    required this.lastSeen,
+    required this.id,
+    required this.photo,
+    required this.isOnline,
+    required this.phone,
+    required this.name,
+  });
 
-  final List<Message> messages;
-  final String image;
+  final int id;
   final String name;
-  bool? isOnline = true;
-  DateTime? lastOnline;
+  final String? photo;
+  final String phone;
+  bool isOnline = false;
+  String lastSeen;
+  final Message? lastMessage;
+
+  int get getid => id;
 }
